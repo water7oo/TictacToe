@@ -9,11 +9,35 @@
   <body>
     <h1><center>TIC TAC TOE</center></h1>
     <div id="NavDiv">
-      <center><button id="reset" onclick="clearCells()">RESET</button></center>
+      <div id="startOverlay" class="overlay">
+        <div class="overlay-content">
+          <button id="startButton" onclick="startGame()">START GAME</button>
+        </div>
+      </div>
 
-      <!-- <button id="startGame" onclick="createBoard()">Start Game</button> -->
+    
+
+      <div id="overlay" class="overlay">
+        <div class="overlay-content" id="gameOverOverlay">
+          <span class="close" onclick="toggleOverlay()">&times;</span>
+          <div id="scoreDiv"> <p id="P1score">0</p>
+            <div id="space"></div>
+          <p id="P2score">0</p></div>
+         
+            <p id="winnerMessage"> </p>
+            <button id="playAgain" onclick="replayGame()">Play Again</button>
+          
+            </div>
+          </form>
+        </div>
+
+      
+      </div>
     </div>
-    <div id="boardSpace"></div>
+    <div id="boardSpace">
+      <!-- <div id="score"> <p>0</p>
+      <div id="score"> <p>0</p> -->
+    </div>
   </body>
   <script src="TicTacToe.js"></script>
 </html>
