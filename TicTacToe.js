@@ -24,7 +24,7 @@ const createBoard = () => {
   const boardSpace = document.getElementById("boardSpace");
 
   let P1score = 0;
-  let p2score = 0;
+  let P2score = 0;
 
   const scoreCounter = document.getElementById("score");
   // scoreCounter.textContent = `${P1score} - ${P2score}`;
@@ -50,8 +50,7 @@ const createBoard = () => {
           makeMove(cell, currentPlayer);
           if (winCon(currentPlayer.name, currentPlayer.marker)) {
             console.log(`${currentPlayer.name} wins!`);
-            scores();
-            showScores();
+            toggleOverlay();
           }
           currentPlayer = currentPlayer === playerOne ? playerTwo : playerOne;
         }
@@ -96,19 +95,6 @@ function scores(player) {
   }
 }
 
-function showScores(playerOne, playerTwo) {
-  const scoreCounter = document.getElementById("score");
-  scoreCounter.textContent = ` ${playerOne.scored} - ${playerTwo.scored}`;
-}
-
-function updateScores() {
-  if (playerOne.scored) {
-    playerOne.score++;
-  } else {
-    playerTwo.score++;
-  }
-}
-
 //Factory that stores the players information
 function createPlayer(name, marker, score) {
   return {
@@ -124,7 +110,7 @@ const playerTwo = createPlayer("P2", "O", 0);
 
 const gameBoard = createBoard();
 
-const winCon = (name, marker, score) => {
+const winCon = (name, marker) => {
   const cells = document.querySelectorAll(".cell");
 
   const possWin = [
@@ -146,32 +132,34 @@ const winCon = (name, marker, score) => {
       cells[b].textContent === marker &&
       cells[c].textContent === marker
     ) {
-      hasWon = true;
-      toggleOverlay(true, name);
-      return true;
+      return name;
     }
   }
 
-  return false;
+  return null;
 };
 
-function toggleOverlay(hasWon, name, score) {
+function toggleOverlay(hasWon, name) {
   const overlay = document.getElementById("overlay");
   const gameText = document.getElementById("winnerMessage");
-  const P1score = document.getElementById("P1score");
-  const P2score = document.getElementById("P2score");
 
   gameText.style.textAlign = "center";
 
   if (hasWon) {
     gameText.textContent = `${name} wins!`;
-    playerOne.scored = true;
-    P1score.textContent = playerOne.score;
+    if (name === playerOne.name) {
+      playerOne.score++;
+    } else {
+      playerTwo.score++;
+    }
   }
 
-  overlay.style.display = "block";
+  const P1score = document.getElementById("P1score");
+  const P2score = document.getElementById("P2score");
+  P1score.textContent = playerOne.score;
+  P2score.textContent = playerTwo.score;
 
-  showScores();
+  overlay.style.display = "block";
 }
 
 function replayGame() {
