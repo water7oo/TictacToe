@@ -1,13 +1,7 @@
-//Create a 3x3 game board
-//2 player objects enter the board
-
-//Your main goal here is to have as little global code as possible.
-//Try tucking everything away inside of a module or factory. Rule of thumb:
-//if you only ever need ONE of something
-//(gameBoard, displayController), use a module.
-//If you need multiples of something (players!), create them with factories.
-
-//Make a button that creates the gameBoard
+//Make a button that creates the gameBoard and starts the game
+//Add score count
+//Add a overlay that displays a rematch button and the score counter
+//tweek animations
 
 const createBoard = () => {
   const board = [];
